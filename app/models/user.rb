@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_accessor :password
+  attr_accessible :name,:email,:password,:password_confirmation
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -7,22 +9,42 @@ class User < ActiveRecord::Base
   validates :email, :presence => true,
                    :format => {:with => email_regex},
                    :uniqueness => true
+  validates :password, :presence => true,
+                       :confirmation => true,
+                       :length => {:within => 6..40}
   
-  def password
-    @password
-  end
+  before_save :encrypt_password
   
-  def password=(pass)
-    return unless pass
-    @password = pass
-    generate_password(pass)
-    
+  def has_password?(submitted_password)
+    hashed_password == encrypt(submitted_password)
   end
   
   private
-  def generate_password(pass)
-    salt = Array.new(10){rand(1024).to_s(36)}.join
-    self.salt,self.hashed_password = 
-      salt,Digest::SHA256.hexdigest(pass+salt)
+  def encrypt_password
+    self.salt = make_salt unless has_password?(password)
+    self.hashed_password = encrypt(password)
+  end
+  
+  def encrypt(string)
+    secure_hash("#{salt}--#{string}")
+  end
+  
+  def make_salt
+    secure_hash("#{Time.now.utc}--#{password}")
+  end
+  
+  def secure_hash(string)
+    Digest::SHA256.hexdigest(string)
+  end
+  
+  def self.authenticate(email,submitted_password)
+    user = find_by_email(email)
+    return nil if user.nil?
+    return user if user.has_password?(submitted_password)
+  end
+  
+  def self.authenticate_with_salt(id,cookie_salt)
+    user = find_by_id(id)
+    (user && user.salt == cookie_salt) ? user : nil
   end
 end
