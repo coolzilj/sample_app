@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
-
+gem 'gravatar_image_tag'
 gem 'sqlite3'
 
 group :assets do
@@ -14,7 +14,7 @@ gem 'jquery-rails'
 
 group :development do
 	gem 'rspec-rails','2.6.1'
-	gem 'annotate'
+
 end
 
 group :test do 
