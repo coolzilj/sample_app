@@ -1,0 +1,146 @@
+
+$bg-c:#eee;
+
+body {
+  background:$bg-c ;
+}
+
+div#main{
+	margin-top: 80px;
+	font-size: 120%;
+	background: #fff;
+	padding:20px;
+	border:1px solid darken($bg-c,5%);
+	@include border-radius(3px);
+}
+
+div#footer {
+  text-align: left;
+  margin:10px auto;
+	li { float:left; 
+		 margin-right:20px;}
+}
+
+div.form-head{
+	background:#f5f5f5;
+	border-bottom:1px solid darken($bg-c,5%);
+	padding:20px 30px;
+	margin:-20px -20px 20px -20px;
+	h1{margin-bottom:0;}
+}
+
+/* User show page */
+
+div.content{
+	width:600px;
+	float:left;
+	margin-right:20px;
+}
+
+div.sidebar{
+	width:278px;/*main has 1px border*/
+	float:left;
+}
+
+/* New post form*/
+
+form#new_micropost{
+	textarea{width:98%;height:50px;margin-bottom:10px;}
+}
+
+/* pagination */
+
+.apple_pagination {
+  background: #f1f1f1;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+  padding: 1em;
+  cursor: default; }
+  .apple_pagination a, .apple_pagination span {
+    padding: 0.2em 0.3em; }
+  .apple_pagination .disabled {
+    color: #aaaaaa; }
+  .apple_pagination em {
+    font-style: normal;
+    font-weight: bold;
+    background-color: #bebebe;
+    display: inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.5;
+	@include border-radius(1em);
+    text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px; }
+  .apple_pagination a {
+    text-decoration: none;
+    color: black; }
+    .apple_pagination a:hover, .apple_pagination a:focus {
+      text-decoration: underline; }
+/* users */
+
+ul.users {
+  margin-top: 1em;
+}
+
+.users li {
+  width:79px;
+  float:left;
+  margin:5px;
+  display:block;
+}
+
+h1.micropost {
+  margin-bottom: 0.3em;
+}
+
+table.microposts {
+  margin-top: 1em;
+}
+
+table.microposts tr {
+  height: 70px;
+}
+
+table.microposts tr td.gravatar {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  width: 50px;
+}
+
+table.microposts tr td.micropost {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+table.microposts tr td.micropost span.timestamp {
+  display: block;
+  font-size: 85%;
+  color: #666;
+}
+
+div.user_info img {
+  padding-right: 0.1em;
+}
+
+div.user_info a {
+  text-decoration: none;
+}
+
+div.user_info span.user_name {
+  position: absolute;
+}
+
+div.user_info span.microposts {
+  font-size: 80%;
+}
+
+form.new_micropost {
+  margin-bottom: 2em;
+}
+
+form.new_micropost textarea {
+  height: 4em;
+  margin-bottom: 0;
+}
+
+
